@@ -1,0 +1,23 @@
+* C:\Users\user\Desktop\graphics assign3\Schematic1.sch
+
+* Schematics Version 9.1 - Web Update 1
+* Wed Nov 13 09:21:30 2024
+
+
+
+** Analysis setup **
+.tran 20ns 10ms 0 0.01us
+.OP 
+
+
+* From [PSPICE NETLIST] section of pspiceev.ini:
+.lib "nom.lib"
+
+.INC "Schematic1.net"
+.INC "Schematic1.als"
+
+
+.probe
+
+
+.END
