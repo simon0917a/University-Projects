@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Picture
+comment1.params=
+comment1.target=Picture()
+comment2.params=s
+comment2.target=void\ addShape(Shape)
+comment3.params=
+comment3.target=void\ computeShape()
+comment4.params=
+comment4.target=void\ listAllShapeTypes()
+comment5.params=className
+comment5.target=void\ listSingleShapeType(java.lang.String)
+numComments=6
