@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=CD
+comment1.params=theTitle\ theArtist\ tracks\ time
+comment1.target=CD(java.lang.String,\ java.lang.String,\ int,\ int)
+comment1.text=\r\n\ Initialize\ the\ CD.\r\n
+comment2.params=
+comment2.target=void\ print()
+comment2.text=\r\n\ Print\ details\ about\ this\ CD\ to\ the\ text\ terminal.\r\n
+numComments=3

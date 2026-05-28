@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Video
+comment1.params=theTitle\ theDirector\ time
+comment1.target=Video(java.lang.String,\ java.lang.String,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Video\r\n
+comment2.params=
+comment2.target=void\ print()
+comment2.text=\r\n\ Print\ details\ about\ this\ Video\ to\ the\ text\ terminal.\r\n
+numComments=3

@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Item
+comment1.params=theTitle\ time
+comment1.target=Item(java.lang.String,\ int)
+comment1.text=\r\n\ Initialise\ the\ fields\ of\ the\ item.\r\n
+comment2.params=
+comment2.target=java.lang.String\ getTitle()
+comment3.params=comment
+comment3.target=void\ setComment(java.lang.String)
+comment3.text=\r\n\ Enter\ a\ comment\ for\ this\ item.\r\n
+comment4.params=
+comment4.target=java.lang.String\ getComment()
+comment4.text=\r\n\ Return\ the\ comment\ for\ this\ item.\r\n
+comment5.params=ownIt
+comment5.target=void\ setOwn(boolean)
+comment5.text=\r\n\ Set\ the\ flag\ indicating\ whether\ we\ own\ this\ item.\r\n
+comment6.params=
+comment6.target=boolean\ getOwn()
+comment6.text=\r\n\ Return\ information\ whether\ we\ own\ a\ copy\ of\ this\ item.\r\n
+comment7.params=
+comment7.target=void\ print()
+comment7.text=\r\n\ Print\ details\ about\ this\ item\ to\ the\ text\ terminal.\r\n
+numComments=8
