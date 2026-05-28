@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'application' // Use the standard application plugin
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+// Configure the application plugin to know which class has our main() method
+application {
+    mainClass = 'com.example.api.Main'
+}
+
+ext {
+    // Define versions for modern dependencies
+    jerseyVersion = '3.1.5' // Jersey 3 for Jakarta
+    javaVersion = '21'
+    jettyVersion = '11.0.20'
+
+}
+
+dependencies {
+    // You also need a JAX-RS implementation like Jersey or RESTEasy
+    // Jersey 3 implementation (using jakarta.* packages)
+    implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
+    implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+
+    // Jersey modules for XML and JSON support
+    implementation "org.glassfish.jersey.media:jersey-media-jaxb:${jerseyVersion}"
+    implementation "org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}"
+
+    // an HTTP 500 Internal Server Error usually means the JAX‑RS runtime still can’t marshal your CD object into XML.
+    // Since Java 11, JAXB is no longer bundled with the JDK. Even if you annotate your class, Jersey can’t serialize it unless you add the JAXB runtime libraries.
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api:3.0.1"
+    implementation "org.glassfish.jaxb:jaxb-runtime:3.0.2"
+
+    // Dependencies in your Dome.java source file
+    implementation 'jakarta.inject:jakarta.inject-api:2.0.1' // provides the @Singleton annotation
+    implementation 'com.google.code.gson:gson:2.10.1' // A slighly newer Gson
+
+    // --- Embedded Jetty Server ---
+    // Core Jetty server and servlet handling for the Main class.
+    // THIS LINE provides the org.eclipse.jetty.server.Server class
+    implementation "org.eclipse.jetty:jetty-server:${jettyVersion}"
+    implementation "org.eclipse.jetty:jetty-servlet:${jettyVersion}"
+
+    // Add these lines to use the Jakarta JSON Processing (JSON-P) API
+    // Change the versions to a matching, available version. Modify them to use version 2.0.1, which is a stable and available pair
+    implementation 'jakarta.json:jakarta.json-api:2.0.1'
+    implementation 'org.glassfish:jakarta.json:2.0.1'
+
+}
+
+// Set Java version compatibility
+java {
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
+    targetCompatibility = JavaVersion.toVersion(javaVersion)
+}

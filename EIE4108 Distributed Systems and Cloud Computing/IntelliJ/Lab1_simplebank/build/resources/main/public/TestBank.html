@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Bank API Client</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 2em;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #444;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            color: #0056b3;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3em;
+            margin-top: 1.5em;
+        }
+        .api-section {
+            margin-bottom: 2em;
+            padding: 1.5em;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-top: 1em;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"], input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .response-output {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 1em;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 50px;
+            margin-top: 1em;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        #historyDisplay {
+            background-color: #eef7ff;
+            border-left: 5px solid #0056b3;
+            color: #003366;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            line-height: 1.6;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Simple Bank API Client</h1>
+
+    <!-- Create User -->
+    <div class="api-section">
+        <h2>1. Create User</h2>
+        <form id="createUserForm">
+            <label for="createUserId">User Id:</label>
+            <input type="text" id="createUserId" placeholder="User ID" required>
+            <label for="createPassword">Password:</label>
+            <input type="password" id="createPassword" placeholder="mysecretpassword" required>
+            <label for="createFullname">Full name:</label>
+            <input type="text" id="createFullname" placeholder="full name" required>
+            <label for="initialDeposit">Initial Deposit:</label>
+            <input type="number" id="initialDeposit" step="0.01" placeholder="100.50" required>
+            <button type="button" onclick="addUser()">Create User</button>
+        </form>
+        <label for="Status1">Status:</label><input type="text" id="Status1" size="30" value="" placeholder="status" ><br/>
+    </div>
+
+    <!-- Get User Information -->
+    <div class="api-section">
+        <h2>2. Get User Information</h2>
+        <form id="getUserForm">
+            <label for="getUserId">User ID:</label>
+            <input type="text" id="getUserId" placeholder="User ID" required>
+            <label for="getUserPass">Password (x-pass):</label>
+            <input type="password" id="getUserPass" placeholder="mysecretpassword" required>
+            <button type="button" onclick="getUser()">Get User Info</button>
+        </form>
+        <label for="Status2">Status:</label><input type="text" id="Status2" size="30" value="" placeholder="status" ><br/>
+    </div>
+
+    <!-- Deposit -->
+    <div class="api-section">
+        <h2>3. Deposit Funds</h2>
+        <form id="depositForm">
+            <label for="depositUserId">User ID:</label>
+            <input type="text" id="depositUserId" placeholder="User ID" required>
+            <label for="depositPass">Password (x-pass):</label>
+            <input type="password" id="depositPass" placeholder="mysecretpassword" required>
+            <label for="depositAmount">Amount:</label>
+            <input type="number" id="depositAmount" step="0.01" placeholder="50.00" required>
+            <button type="button" onclick="deposit()">Deposit</button>
+        </form>
+        <label for="Status3">Status:</label><input type="text" id="Status3" size="30" value="" placeholder="status" ><br/>
+    </div>
+
+    <!-- Withdraw -->
+    <div class="api-section">
+        <h2>4. Withdraw Funds</h2>
+        <form id="withdrawForm">
+            <label for="withdrawUserId">User ID:</label>
+            <input type="text" id="withdrawUserId" placeholder="User ID" required>
+            <label for="withdrawPass">Password (x-pass):</label>
+            <input type="password" id="withdrawPass" placeholder="mysecretpassword" required>
+            <label for="withdrawAmount">Amount:</label>
+            <input type="number" id="withdrawAmount" step="0.01" placeholder="25.00" required>
+            <button type="button" onclick="withdraw()">Withdraw</button>
+        </form>
+        <label for="Status4">Status:</label><input type="text" id="Status4" size="30" value="" placeholder="status" ><br/>
+    </div>
+
+    <!-- Transfer -->
+    <div class="api-section">
+        <h2>5. Transfer Funds</h2>
+        <form id="transferForm">
+            <label for="fromUserId">From User ID:</label>
+            <input type="text" id="fromUserId" placeholder="Sender's ID" required>
+            <label for="transferPass">Sender's Password (x-pass):</label>
+            <input type="password" id="transferPass" placeholder="Sender's password" required>
+            <label for="toUserId">To User ID:</label>
+            <input type="text" id="toUserId" placeholder="Recipient's ID" required>
+            <label for="transferAmount">Amount:</label>
+            <input type="number" id="transferAmount" step="0.01" placeholder="20.00" required>
+            <button type="button" onclick="transfer()">Transfer</button>
+        </form>
+        <label for="Status5">Status:</label><input type="text" id="Status5" size="30" value=""
+                                                   placeholder="status"><br/>
+    </div>
+
+    <div class="api-section">
+        <h2>6. View Transaction History (Creative Feature)</h2>
+        <form id="historyForm">
+            <label for="historyUserId">User ID:</label>
+            <input type="text" id="historyUserId" placeholder="User ID" required>
+            <label for="historyPass">Password (x-pass):</label>
+            <input type="password" id="historyPass" placeholder="mysecretpassword" required>
+            <button type="button" onclick="getHistory()">View History</button>
+        </form>
+        <div id="historyDisplay" class="response-output">Transaction history will appear here...</div>
+    </div>
+
+</div>
+
+<script>
+    // The base URL for the API. Assumes the API is served from the same origin.
+    const API_BASE_URL = "http://localhost:8080/bank";
+
+    // --- API Functions ---
+
+    // 1. Create User
+	function addUser() {
+        const userId = document.getElementById("createUserId").value;
+        const password = document.getElementById("createPassword").value;
+        const fullname = document.getElementById("createFullname").value;
+        const balance = document.getElementById("initialDeposit").value;
+
+        if (userId.trim() === '') {
+            alert("User Id cannot be empty or only spaces");
+            return;
+        }
+
+        const url = `${API_BASE_URL}/create/${encodeURIComponent(userId)}/${encodeURIComponent(password)}/${encodeURIComponent(fullname)}/${balance}`;
+
+        alert(`/bank/create/${userId},${password},${fullname}, ${balance}`);
+
+        fetch(url, { method: 'POST' })
+            .then(response => {
+                response.text().then(text => {
+                    document.getElementById("Status1").value = text;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+	}
+
+    // 2. Get User
+	function getUser() {
+        const userId = document.getElementById("getUserId").value;
+        const password = document.getElementById("getUserPass").value;
+
+        if (userId.trim() === '') {
+            alert("User Id cannot be empty or only spaces");
+            return;
+        }
+
+        const url = `${API_BASE_URL}/users/${encodeURIComponent(userId)}?x-pass=${encodeURIComponent(password)}`;
+
+        alert(`/bank/users/${userId}?x-pass=${password}`);
+
+        fetch(url)
+            .then(response => {
+                response.text().then(text => {
+                    document.getElementById("Status2").value = text;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+	}
+
+    // 3. Deposit
+    function deposit() {
+        const userId = document.getElementById("depositUserId").value;
+        const password = document.getElementById("depositPass").value;
+        const amount = document.getElementById("depositAmount").value;
+
+        if (userId.trim() === '') {
+            alert("User Id cannot be empty or only spaces");
+            return;
+        }
+
+        const url = `${API_BASE_URL}/accounts/${encodeURIComponent(userId)}/deposit?x-pass=${encodeURIComponent(password)}&amount=${amount}`;
+
+        alert(`/bank/accounts/${userId}/deposit?amount=${amount}`);
+
+        fetch(url, { method: 'POST' })
+            .then(response => {
+                response.text().then(text => {
+                    document.getElementById("Status3").value = text;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+	}
+
+    // 4. Withdraw
+    function withdraw() {
+        const userId = document.getElementById("withdrawUserId").value;
+        const password = document.getElementById("withdrawPass").value;
+        const amount = document.getElementById("withdrawAmount").value;
+
+        if (userId.trim() === '') {
+            alert("User Id cannot be empty or only spaces");
+            return;
+        }
+
+        const url = `${API_BASE_URL}/accounts/${encodeURIComponent(userId)}/withdraw?x-pass=${encodeURIComponent(password)}&amount=${amount}`;
+
+        alert(`/bank/accounts/${userId}/withdraw?amount=${amount}`);
+
+        fetch(url, { method: 'POST' })
+            .then(response => {
+                response.text().then(text => {
+                    document.getElementById("Status4").value = text;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+	}
+
+    // 5. Transfer
+     function transfer() {
+         const fromId = document.getElementById("fromUserId").value;
+         const toId = document.getElementById("toUserId").value;
+         const password = document.getElementById("transferPass").value;
+         const amount = document.getElementById("transferAmount").value;
+
+         if (fromId.trim() === '' || toId.trim() === '') {
+             alert("User Id cannot be empty or only spaces");
+             return;
+         }
+
+         const url = `${API_BASE_URL}/accounts/transfer?from=${encodeURIComponent(fromId)}&to=${encodeURIComponent(toId)}&x-pass=${encodeURIComponent(password)}&amount=${amount}`;
+
+         alert(`/bank/accounts/transfer?from=${fromId}&to=${toId}&amount=${amount}`);
+
+         fetch(url, { method: 'POST' })
+             .then(response => response.text().then(text => {
+                 document.getElementById("Status5").value = text;
+             }))
+             .catch(error => console.error('Error:', error));
+	}
+
+    //6. Get History
+    function getHistory() {
+        const userId = document.getElementById("historyUserId").value;
+        const password = document.getElementById("historyPass").value;
+
+        if (userId.trim() === '') {
+            alert("User Id cannot be empty");
+            return;
+        }
+
+        const url = `${API_BASE_URL}/users/${encodeURIComponent(userId)}/history?x-pass=${encodeURIComponent(password)}`;
+
+        alert(`/bank/users/${userId}/history?x-pass=${password}`);
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) return response.text();
+                return response.json();
+            })
+            .then(data => {
+                const display = document.getElementById("historyDisplay");
+
+                if (data && data.history) {
+                    let output = `Current Balance: $${data.balance}\n`;
+                    output += `--------------------------\n`;
+                    output += data.history.join('\n');
+
+                    display.innerText = output;
+                } else {
+                    display.innerText = data;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>
