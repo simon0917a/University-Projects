@@ -1,0 +1,47 @@
+Q1
+
+#include <iostream>
+using namespace std;
+int main() {
+int units;
+cout << "Enter a integer: ";
+cin >> units;
+if (units <=0)
+cout << "Input error\n";
+return 0;
+}
+
+Q2
+
+#include <iostream>
+using namespace std;
+int main() {
+int units;
+cout << "Enter a integer: ";
+cin >> units;
+int total = units*5;
+if (units <=0)
+cout << "Input error\n";
+else
+cout << total;
+return 0;
+}
+
+Q3
+
+#include <iostream>
+using namespace std;
+int main () {
+    float coursework;
+    cout << "Enter coursework marks: ";
+    cin >> coursework;
+    float examination;
+    cout << "Enter examination marks: ";
+    cin >> examination;
+    float Overall = (coursework*0.4 )+ (examination*0.6);
+    if (coursework >= 50 && examination >=50)
+    cout << "Your overall result is " << Overall << " (Passed)\n";
+    else
+    cout << "Your overall result is " << Overall << " (Failed)\n";
+    return 0;
+}

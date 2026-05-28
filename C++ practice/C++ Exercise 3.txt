@@ -1,0 +1,33 @@
+Q1
+
+#include <iostream>
+using namespace std;
+int main () {
+    int x1;
+    cout << "Enter the first integer: ";
+    cin >> x1;
+    int x2;
+    cout << "Enter the second integer: ";
+    cin >> x2;
+    return 0;
+}
+
+Q2
+
+#include <iostream>
+using namespace std;
+int main () {
+    int x1;
+    cout << "Enter the first integer: ";
+    cin >> x1;
+    int x2;
+    cout << "Enter the second integer: ";
+    cin >> x2;
+    if (x1 == x2)
+    cout << "The first integer is the same as the second integer!\n";
+    if (x1 < x2)
+    cout << "The first integer is less than the second integer!\n";
+    if (x1 > x2)
+    cout << "The first integer is greater than the second integer!\n";
+    return 0;
+}

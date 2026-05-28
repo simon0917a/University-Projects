@@ -1,0 +1,57 @@
+Q1
+
+#include <iostream>
+using namespace std;
+int main () {
+    cout << "Enter 10 numbers below," << endl;
+    int x = 0;
+    float y = 0;
+    int z;
+    for (z = 1; z <= 10; z++) {
+        cout << "Number_" << z << ": ";
+        cin >> x;
+        y += x;
+        }
+    cout << "The sum of 10 input numbers is: " << y << endl;
+    cout << "The average of 10 input numbers is " << y/10;
+    return 0;
+}
+
+Q2
+
+#include <iostream>
+using namespace std;
+int main () {
+    cout << "Enter 10 numbers below," << endl;
+    int x = 0;
+    float y = 0; 
+    int z = 1; 
+    while (z <= 10) {
+        cout << "Number_" << z << ": "; z++; 
+        cin >> x;
+        y += x;
+        }
+    cout << "The sum of 10 input numbers is: " << y << endl;
+    cout << "The average of 10 input numbers is " << y/10;
+    return 0;
+}
+
+Q3
+
+#include <iostream>
+using namespace std;
+int main () {
+    cout << "Enter 10 numbers below," << endl;
+    int x = 0;
+    float y = 0;
+    int z = 1;
+    do {
+        cout << "Number_" << z << ": "; z++;
+        cin >> x;
+        y += x;
+        }
+        while (z <= 10);
+    cout << "The sum of 10 input numbers is: " << y << endl;
+    cout << "The average of 10 input numbers is " << y/10;
+    return 0;
+}
