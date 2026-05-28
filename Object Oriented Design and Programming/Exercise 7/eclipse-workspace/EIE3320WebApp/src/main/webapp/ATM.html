@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="debit" method="POST"> 
+<p><strong>Please select the amount that you want to withdraw from your 
+account?</strong></p> 
+<dl> 
+ <dd><input type="radio" name="Amount" value="1">1 </dd> 
+ <dd><input type="radio" name="Amount" value="10">10</dd> 
+ <dd><input type="radio" checked name="Amount" value="100">100</dd> 
+ <dd><input type="radio" name="Amount" value="1000">1000</dd> 
+</dl> 
+<p><input type="submit" value="Submit"> </p> 
+</form> 
+<form method="POST" action="credit"> 
+<p><strong>Please select the amount that you want to deposit in your 
+account?</strong></p> 
+<dl> 
+ <dd><input type="radio" name="Amount" value="1">1 </dd> 
+ <dd><input type="radio" name="Amount" value="10">10</dd> 
+ <dd><input type="radio" checked name="Amount" value="100">100</dd> 
+ <dd><input type="radio" name="Amount" value="1000">1000</dd> 
+</dl> 
+<p><input type="submit" value="Submit" name="B1"></p> 
+</form> 
+<form method="GET" action="checkBalance"> 
+<p><input type="submit" value="Check Balance" name="B1"></p> </form>
+</body>
+</html>

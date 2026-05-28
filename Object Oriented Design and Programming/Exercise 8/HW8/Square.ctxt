@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Square
+comment1.params=
+comment1.target=Square()
+comment2.params=l
+comment2.target=Square(float)
+comment3.params=
+comment3.target=void\ readShape()
+comment4.params=
+comment4.target=void\ computeArea()
+comment5.params=
+comment5.target=void\ computePerimeter()
+comment6.params=
+comment6.target=void\ displayShape()
+numComments=7

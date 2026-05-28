@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Exercise6</title>
+<script language="JavaScript">
+
+function isBlank(s) {
+    var i
+    for(i=0; i<s.length; i++) {
+        if(s.charAt(i) != " ")
+            return false
+    }
+    return true
+}
+
+function validate(fieldName, fieldValue) {
+    if(isBlank(fieldValue)) {
+        alert("The " + fieldName + " field cannot be blank")
+        return false
+    }
+    return true
+}
+
+function validateForm(action) {
+    var nameVal = document.testing.name.value
+    var telVal  = document.testing.tele.value
+
+    if(!validate("name", nameVal))
+        return false
+
+    if(!validate("telephone number", telVal))
+        return false
+
+    alert("Name = " + nameVal + ", telephone number = " + telVal + ", the " + action + " button is pressed.")
+    return true
+}
+
+</script>
+</head>
+<body>
+<form name="testing" onsubmit="return false">
+
+<p>Name: <input type="text" name="name" size="16">
+   Telephone number: <input type="text" name="tele" size="14"></p>
+
+<p>
+  <input type="button" value="Add" onclick="validateForm('add')">
+  <input type="button" value="Search" onclick="validateForm('search')">
+</p>
+</form>
+</body>
+</html>
